@@ -11,26 +11,29 @@ import java.io.IOException;
 
 public class LoginFilter implements Filter {
 
-    private static final String[] WHITE_LIST = {"/", "/users/signup", "login", "/logout"};
+    // 로그인 인증이 필요하지 않은 path
+    private static final String[] WHITE_LIST = {"/", "/users/signup", "/users/login"};
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         // 다양한 기능을 사용하기 위해 다운 캐스팅
         HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+        // 요청한 path를 반환
         String requestURI = httpRequest.getRequestURI();
 
-        // 다양한 기능을 사용하기 위해 다운 캐스팅
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         if(!isWhiteList(requestURI)){
 
             HttpSession session = httpRequest.getSession(false);
 
-            if(session == null || session.getAttribute("sessionKey") == null) {
+            if(session == null || session.getAttribute("login") == null) {
                 throw new RuntimeException("로그인 해주세요.");
             }
         }
+        // 다음 필터 호출
         chain.doFilter(request,response);
 
     }

@@ -20,13 +20,19 @@ public class Schedule extends DateEntity{
     @Column(columnDefinition = "longtext")
     private String task;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id" , nullable = false)
     private User user;
 
     public Schedule(String title, String task) {
         this.title = title;
         this.task = task;
+    }
+
+    public Schedule(String title, String task, User user) {
+        this.title = title;
+        this.task = task;
+        this.user = user;
     }
 
     // 일정 수정
