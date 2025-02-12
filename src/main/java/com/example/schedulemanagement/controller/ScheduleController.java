@@ -40,5 +40,10 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleService.update(scheduleId, requestDto));
     }
 
+    // 일정 삭제
+    @DeleteMapping("/schedules/{scheduleId}")
+    public void deleteById(@PathVariable Long scheduleId){
+        scheduleService.deleteById(scheduleId);
+    }
 
 }

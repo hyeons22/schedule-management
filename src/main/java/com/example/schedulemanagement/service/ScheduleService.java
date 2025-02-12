@@ -63,4 +63,12 @@ public class ScheduleService {
 
         return new ScheduleResponseDto(schedule.getId(), schedule.getName(), schedule.getTitle(), schedule.getTask());
     }
+
+    // 일정 삭제
+    @Transactional
+    public void deleteById(Long scheduleId) {
+        // 일정 존재여부 체크
+        scheduleRepository.findByIdOrElseThrow(scheduleId);
+        scheduleRepository.deleteById(scheduleId);
+    }
 }
