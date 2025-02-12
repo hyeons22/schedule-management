@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -21,5 +24,18 @@ public class UserService {
         User savedUser = userRepository.save(user);
 
         return new UserResponseDto(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
+    }
+
+    // 유저 전체 조회
+    @Transactional(readOnly = true)
+    public List<UserResponseDto> findAll() {
+        List<User> users = userRepository.findAll();
+        List<UserResponseDto> dtoList = new ArrayList<>();
+
+        for (User user : users) {
+            UserResponseDto userResponseDto = new UserResponseDto(user.getId(), user.getName(), user.getEmail());
+            dtoList.add(userResponseDto);
+        }
+        return dtoList;
     }
 }
