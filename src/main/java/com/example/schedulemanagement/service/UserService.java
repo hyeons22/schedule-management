@@ -61,4 +61,6 @@ public class UserService {
         User findUser = userRepository.findByIdOrElseThrow(userId);
         userRepository.deleteById(userId);
     }
+
+
 }

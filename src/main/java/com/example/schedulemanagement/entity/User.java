@@ -28,8 +28,16 @@ public class User extends DateEntity{
         this.email = email;
     }
 
+    // 유저 수정
     public void update(String name, String email) {
         this.name = name;
+        this.email = email;
+    }
+
+    // 로그인
+    public User(String name, String password, String email) {
+        this.name = name;
+        this.password = password;
         this.email = email;
     }
 }
