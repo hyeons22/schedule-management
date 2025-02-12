@@ -15,23 +15,22 @@ public class Schedule extends DateEntity{
     private Long id;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
     private String title;
 
     @Column(columnDefinition = "longtext")
     private String task;
 
-    public Schedule(String name, String title, String task) {
-        this.name = name;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Schedule(String title, String task) {
         this.title = title;
         this.task = task;
     }
 
     // 일정 수정
-    public void update(String name, String title, String task) {
-        this.name = name;
+    public void update(String title, String task) {
         this.title = title;
         this.task = task;
     }

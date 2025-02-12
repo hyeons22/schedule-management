@@ -20,11 +20,10 @@ public class ScheduleService {
     // 일정생성
     @Transactional
     public ScheduleResponseDto save(ScheduleRequestDto requestDto) {
-        Schedule schedule = new Schedule(requestDto.getName(), requestDto.getTitle(), requestDto.getTask());
+        Schedule schedule = new Schedule(requestDto.getTitle(), requestDto.getTask());
         Schedule savedSchedule = scheduleRepository.save(schedule);
         return new ScheduleResponseDto(
                 savedSchedule.getId(),
-                savedSchedule.getName(),
                 savedSchedule.getTitle(),
                 savedSchedule.getTask()
         );
@@ -39,7 +38,6 @@ public class ScheduleService {
             ScheduleResponseDto scheduleResponseDto =
                     new ScheduleResponseDto(
                             schedule.getId(),
-                            schedule.getName(),
                             schedule.getTitle(),
                             schedule.getTask()
                     );
@@ -52,16 +50,16 @@ public class ScheduleService {
     @Transactional(readOnly = true)
     public ScheduleResponseDto findById(Long scheduleId) {
         Schedule schedule = scheduleRepository.findByIdOrElseThrow(scheduleId);
-        return new ScheduleResponseDto(schedule.getId(), schedule.getName(), schedule.getTitle(), schedule.getTask());
+        return new ScheduleResponseDto(schedule.getId(), schedule.getTitle(), schedule.getTask());
     }
 
     // 일정 수정
     @Transactional
     public ScheduleResponseDto update(Long scheduleId, ScheduleRequestDto requestDto) {
         Schedule schedule = scheduleRepository.findByIdOrElseThrow(scheduleId);
-        schedule.update(requestDto.getName(), requestDto.getTitle(), requestDto.getTask());
+        schedule.update(requestDto.getTitle(), requestDto.getTask());
 
-        return new ScheduleResponseDto(schedule.getId(), schedule.getName(), schedule.getTitle(), schedule.getTask());
+        return new ScheduleResponseDto(schedule.getId(), schedule.getTitle(), schedule.getTask());
     }
 
     // 일정 삭제
