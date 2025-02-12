@@ -38,4 +38,11 @@ public class UserService {
         }
         return dtoList;
     }
+
+    // 유저 단건 조회
+    @Transactional(readOnly = true)
+    public UserResponseDto findById(Long userId) {
+        User user = userRepository.findByIdOrElseThrow(userId);
+        return new UserResponseDto(user.getId(), user.getName(), user.getEmail());
+    }
 }
