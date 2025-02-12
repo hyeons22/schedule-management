@@ -47,4 +47,11 @@ public class ScheduleService {
         }
         return dtoList;
     }
+
+    // 일정 단건 조회
+    @Transactional(readOnly = true)
+    public ScheduleResponseDto findById(Long scheduleId) {
+        Schedule schedule = scheduleRepository.findByIdOrElseThrow(scheduleId);
+        return new ScheduleResponseDto(schedule.getId(), schedule.getName(), schedule.getTitle(), schedule.getTask());
+    }
 }
