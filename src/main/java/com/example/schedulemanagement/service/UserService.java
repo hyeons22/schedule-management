@@ -45,4 +45,13 @@ public class UserService {
         User user = userRepository.findByIdOrElseThrow(userId);
         return new UserResponseDto(user.getId(), user.getName(), user.getEmail());
     }
+
+    // 유저 정보 수정
+    @Transactional
+    public UserResponseDto update(Long userId, UserRequestDto requestDto) {
+        User user = userRepository.findByIdOrElseThrow(userId);
+        user.update(requestDto.getName(), requestDto.getEmail());
+
+        return new UserResponseDto(user.getId(), user.getName(), user.getEmail());
+    }
 }
