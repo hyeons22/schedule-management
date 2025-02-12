@@ -18,6 +18,9 @@ public class User extends DateEntity{
     private String name;
 
     @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
     private String email;
 
     public User(String name, String email) {
