@@ -54,4 +54,11 @@ public class UserService {
 
         return new UserResponseDto(user.getId(), user.getName(), user.getEmail());
     }
+
+    // 유저 삭제
+    @Transactional
+    public void deleteById(Long userId) {
+        User findUser = userRepository.findByIdOrElseThrow(userId);
+        userRepository.deleteById(userId);
+    }
 }
