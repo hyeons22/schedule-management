@@ -30,8 +30,15 @@ public class ScheduleController {
 
     // 일정 단건 조회
     @GetMapping("/schedules/{scheduleId}")
-    private ResponseEntity<ScheduleResponseDto> findById(@PathVariable Long scheduleId){
+    public ResponseEntity<ScheduleResponseDto> findById(@PathVariable Long scheduleId){
         return ResponseEntity.ok(scheduleService.findById(scheduleId));
     }
+
+    // 일정 수정
+    @PutMapping("/schedules/{scheduleId}")
+    public ResponseEntity<ScheduleResponseDto> update(@PathVariable Long scheduleId, @RequestBody ScheduleRequestDto requestDto){
+        return ResponseEntity.ok(scheduleService.update(scheduleId, requestDto));
+    }
+
 
 }

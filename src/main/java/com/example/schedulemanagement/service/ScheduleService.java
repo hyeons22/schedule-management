@@ -54,4 +54,13 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findByIdOrElseThrow(scheduleId);
         return new ScheduleResponseDto(schedule.getId(), schedule.getName(), schedule.getTitle(), schedule.getTask());
     }
+
+    // 일정 수정
+    @Transactional
+    public ScheduleResponseDto update(Long scheduleId, ScheduleRequestDto requestDto) {
+        Schedule schedule = scheduleRepository.findByIdOrElseThrow(scheduleId);
+        schedule.update(requestDto.getName(), requestDto.getTitle(), requestDto.getTask());
+
+        return new ScheduleResponseDto(schedule.getId(), schedule.getName(), schedule.getTitle(), schedule.getTask());
+    }
 }

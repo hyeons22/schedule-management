@@ -28,4 +28,11 @@ public class Schedule extends DateEntity{
         this.title = title;
         this.task = task;
     }
+
+    // 일정 수정
+    public void update(String name, String title, String task) {
+        this.name = name;
+        this.title = title;
+        this.task = task;
+    }
 }
